@@ -1,32 +1,18 @@
-# Arquivos do Docker
+# Docker
 Dockerfile
 docker-compose.yml
 
-# Node modules (se usar)
-node_modules/
-npm-debug.log
-
-# Logs
-*.log
-logs/
+# Docs
+*.md
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
-# Sistema operacional
+# OS
 .DS_Store
 Thumbs.db
-Desktop.ini
 
-# Temporários
-tmp/
-temp/
+# Temp
+*.log
 *.tmp
-
-# Backup
-*.bak
-*.backup

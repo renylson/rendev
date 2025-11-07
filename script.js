@@ -233,4 +233,4 @@ document.querySelectorAll('.feature-card, .pricing-card, .contact-item').forEach
     animateOnScroll.observe(el);
 });
 
-console.log('Rendev Website - Desenvolvido com ❤️');
+console.log('Site Rendev carregado com sucesso!');

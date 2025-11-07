@@ -1,9 +1,9 @@
-# Use Nginx Alpine (leve e seguro)
+# Nginx Alpine
 FROM nginx:alpine
 
-# Metadados
+# Info
 LABEL maintainer="contato@rendev.com.br"
-LABEL description="Rendev - Desenvolvimento de Soluções Digitais"
+LABEL description="Rendev Website"
 
 # Copiar arquivos do site para o diretório do Nginx
 COPY index.html /usr/share/nginx/html/
@@ -20,9 +20,5 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Expor porta 80
 EXPOSE 80
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD wget --quiet --tries=1 --spider http://localhost:8045 || exit 1
-
-# Comando para iniciar o Nginx
+# Iniciar Nginx
 CMD ["nginx", "-g", "daemon off;"]

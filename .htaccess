@@ -1,73 +1,38 @@
-# Apache Configuration - Rendev Site Security
+# Configuracao Apache - Rendev
 
-# Habilitar compressão Gzip
+# Compressao Gzip
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
 </IfModule>
 
-# Cache de arquivos estáticos
+# Cache
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
-    ExpiresByType image/webp "access plus 1 year"
-    ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType text/css "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
-    ExpiresByType application/pdf "access plus 1 month"
-    ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
 
-# Security Headers
+# Headers de seguranca
 <IfModule mod_headers.c>
-    # Prevenir clickjacking
     Header always set X-Frame-Options "SAMEORIGIN"
-    
-    # Prevenir XSS
     Header always set X-XSS-Protection "1; mode=block"
-    
-    # Prevenir MIME sniffing
     Header always set X-Content-Type-Options "nosniff"
-    
-    # Referrer Policy
-    Header always set Referrer-Policy "strict-origin-when-cross-origin"
-    
-    # Remover informações do servidor
-    Header unset Server
-    Header unset X-Powered-By
 </IfModule>
 
-# Bloquear acesso a arquivos sensíveis
-<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql|bak|config)$">
+# Bloquear arquivos sensiveis
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh)$">
     Order Allow,Deny
     Deny from all
 </FilesMatch>
 
-# Redirecionar HTTP para HTTPS (quando tiver SSL)
-# Descomente as linhas abaixo após configurar o certificado SSL
-# <IfModule mod_rewrite.c>
-#     RewriteEngine On
-#     RewriteCond %{HTTPS} off
-#     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-# </IfModule>
-
-# Redirecionar www para não-www (ou vice-versa)
+# Redirecionar www para nao-www
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    # Redirecionar www para não-www
     RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
     RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 </IfModule>
 
-# Prevenir hotlinking de imagens
-<IfModule mod_rewrite.c>
-    RewriteEngine on
-    RewriteCond %{HTTP_REFERER} !^$
-    RewriteCond %{HTTP_REFERER} !^https://(www\.)?rendev.com.br [NC]
-    RewriteRule \.(jpg|jpeg|png|gif|svg|webp)$ - [NC,F,L]
-</IfModule>
-
-# Error Pages
 ErrorDocument 404 /index.html

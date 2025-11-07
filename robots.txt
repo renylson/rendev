@@ -3,18 +3,4 @@
 User-agent: *
 Allow: /
 
-# Sitemaps
 Sitemap: https://rendev.com.br/sitemap.xml
-
-# Bloquear bots indesejados
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: DotBot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /

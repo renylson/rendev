@@ -7,13 +7,8 @@ services:
     ports:
       - "8045:8045"
     restart: unless-stopped
-    environment:
-      - TZ=America/Sao_Paulo
     networks:
       - rendev-network
-    labels:
-      - "com.rendev.description=Site institucional Rendev"
-      - "com.rendev.version=1.0.0"
 
 networks:
   rendev-network:
